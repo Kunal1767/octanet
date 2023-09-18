@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> To-Do List</title>
+    <style>
+        /* CSS code goes here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eff6fb; /* Change to your desired background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        /* ... rest of your CSS code ... */
+    </style>
+</head>
+<body>
+    
+        <div class="container">
+            <h1> To-Do List</h1>
+            <div class="input-col">
+                <input type="text" id="task" placeholder="Add a new task">
+                <select id="category">
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="project">Project</option>
+                </select>
+                <input type="date" id="deadline">
+                
+                <button id="add-task">Add Task</button>
+            </div>
+            <div class="task-list">
+                <!-- Task items will be added here -->
+            </div>
+        </div>
+        <script>
+            // JavaScript code goes here
+            // Define JavaScript functionality for your smart To-Do list
+            const taskInput = document.getElementById('task');
+            const categoryInput = document.getElementById('category');
+            const deadlineInput = document.getElementById('deadline');
+            const priorityInput = document.getElementById('priority');
+            const addTaskButton = document.getElementById('add-task');
+            const taskList = document.querySelector('.task-list');
+    
+            addTaskButton.addEventListener('click', () => {
+                const task = taskInput.value;
+                const category = categoryInput.value;
+                const deadline = deadlineInput.value;
+                const priority = priorityInput.value;
+    
+                if (task.trim() !== '') {
+                    const taskItem = document.createElement('div');
+                    taskItem.classList.add('task-item');
+                    taskItem.innerHTML = `
+                        <h3>${task}</h3>
+                        <p>Category: ${category}</p>
+                        <p>Deadline: ${deadline}</p>
+                        <p>Priority: ${priority}</p>
+                        <button class="complete-task">Complete</button>
+                        <button class="delete-task">Delete</button>
+                    `;
+                    taskList.appendChild(taskItem);
+    
+                    // Clear input fields
+                    taskInput.value = '';
+                    deadlineInput.value = '';
+    
+                    // Add event listeners for task completion and deletion
+                    const completeButton = taskItem.querySelector('.complete-task');
+                    const deleteButton = taskItem.querySelector('.delete-task');
+    
+                    completeButton.addEventListener('click', () => {
+                        taskItem.classList.toggle('completed');
+                    });
+    
+                    deleteButton.addEventListener('click', () => {
+                        taskItem.remove();
+                    });
+                }
+            });
+        </script>
+    </body>
+    </html>
+    
